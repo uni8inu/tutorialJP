@@ -30,7 +30,7 @@ We will start with adding a link inside `blog/templates/blog/post_list.html` fil
 
 投稿のタイトルから詳細記事へリンクさせたい時は、`<h1><a href="">{{ post.title }}</a></h1>`の箇所をリンク先に変えてみましょう。
 
-    <h1><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
 
 `{% url 'blog.views.post_detail' pk=post.pk %}`という不思議なものについて説明しましょう。うすうすわかっているかもしれませんが、`{% %}`という表記はDjangoのテンプレートタグを使っているということを意味します。今回書いたこれは、URLに変換されます。
 
@@ -51,7 +51,7 @@ Djangoに`post_detail`が呼び出すビューを作りましょう。このビ�
 
     urlpatterns = [
         url(r'^$', views.post_list),
-        url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail),
+        url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
     ]
 
 何だか変に見えますが、心配しないで下さい、説明しますと、
